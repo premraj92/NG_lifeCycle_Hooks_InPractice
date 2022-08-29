@@ -58,11 +58,16 @@ export class DemoComponent implements OnInit, OnChanges, DoCheck, AfterContentIn
   }
 
   ngAfterViewChecked(): void {
-    // This hook is fired after the components view is changed
+    // This hook is fired once when the view is initialized(i.e. in the first change detection run) && after that whenever the components view is changed - i.e. any changes in the template
+    // But this hook much like ngAfterContentChecked() is also called for every changeDetection run, even if the view is completely unchanged
     console.log(`7. NgAfterViewChecked called !!`)
   }
 
   ngOnDestroy(): void {
+    // this hook is called whenever the current component/directive is destroyed/removed from the DOM
+    // like when you use a structural Directive like *ngIf to conditionally load a component or routeInto && routeOutOf a component etc
+    // So anything you wanna do before the component/directive is destroyed can be done here
+    // One of the more common thing this is used for is to unsubscribe from Observables
     console.log(`8. NgOnDestroy called !!`)
   }
 }
